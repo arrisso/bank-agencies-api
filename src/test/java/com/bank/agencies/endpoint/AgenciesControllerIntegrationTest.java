@@ -28,13 +28,14 @@ class AgenciesControllerIntegrationTest {
 		Assertions.assertTrue(responseEntity.getBody().length > 0);
 	}
 	
-	@Test
-	public void shouldReturnOKWhenDoAGGetRequest() {
-		ResponseEntity<AgencyResponse[]> responseEntity = restTemplate.getForEntity(API_BASE_URL_GROUP, AgencyResponse[].class);
-
-		Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-		Assertions.assertTrue(responseEntity.getBody().length > 0);
-	}
+	/*
+	 * @Test public void shouldReturnOKWhenDoAGGetRequest() {
+	 * ResponseEntity<AgencyResponse[]> responseEntity =
+	 * restTemplate.getForEntity(API_BASE_URL_GROUP, AgencyResponse[].class);
+	 * 
+	 * Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+	 * Assertions.assertTrue(responseEntity.getBody().length > 0); }
+	 */
 	
 
 }
