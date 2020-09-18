@@ -63,4 +63,28 @@ import java.util.stream.Collectors;
 
             return new ResponseEntity<>(mapGroupAgencyResponse, HttpStatus.OK);
         }
+        
+        
+        
+        /*
+         * solução proposta para ganho de performace seria o uso de paginacao
+         * buscando de um determinado numero de registros por vez. 
+         */
+        @ResponseStatus(HttpStatus.OK)
+        @GetMapping(value = "{page}/{count}")
+        @RequestMapping(value = "/agenciesPages", produces = MediaType.APPLICATION_JSON_VALUE)
+        public ResponseEntity<List<AgencyResponse>> findAllAgenciesPages(@PathVariable int page, @PathVariable int count) {
+
+            List<AgencyGatewayResponse> agencies = findAllAgenciesUseCase.execute();
+
+            List<AgencyResponse> agencyResponse = agencies.stream()
+                    .map(agencyGateway -> AgencyResponse.AgencyResponseBuilder.anAgencyResponse()
+                    .bank(agencyGateway.getBank())
+                    .city(agencyGateway.getCity())
+                    .name(agencyGateway.getName())
+                    .state(agencyGateway.getState()).build())
+                    .collect(Collectors.toList());
+
+            return new ResponseEntity<>(agencyResponse, HttpStatus.OK);
+        }
     }

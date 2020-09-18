@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 class AgenciesControllerIntegrationTest {
 
 	private static final String API_BASE_URL = "/agencies";
+	private static final String API_BASE_URL_GROUP = "/all_grouped_agencies";
 
 	@Autowired
 	private TestRestTemplate restTemplate;
@@ -26,5 +27,14 @@ class AgenciesControllerIntegrationTest {
 		Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 		Assertions.assertTrue(responseEntity.getBody().length > 0);
 	}
+	
+	@Test
+	public void shouldReturnOKWhenDoAGGetRequest() {
+		ResponseEntity<AgencyResponse[]> responseEntity = restTemplate.getForEntity(API_BASE_URL_GROUP, AgencyResponse[].class);
+
+		Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+		Assertions.assertTrue(responseEntity.getBody().length > 0);
+	}
+	
 
 }
